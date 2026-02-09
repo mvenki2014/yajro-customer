@@ -1,0 +1,167 @@
+{
+  "categories": [
+    { "id": "car-bike", "name": "Car/Bike Pooja", "icon": "diya" },
+    { "id": "home-ceremonies", "name": "Home Ceremonies", "icon": "kalash" },
+    { "id": "festivals", "name": "Festivals", "icon": "lotus" },
+    { "id": "astrology", "name": "Astrology", "icon": "stars" },
+    { "id": "special", "name": "Special", "icon": "temple" },
+    { "id": "business", "name": "Business", "icon": "kalash" }
+  ],
+  "services": [
+    {
+      "id": "satyanarayana-vratam",
+      "title": "Satyanarayana Swamy Vratam",
+      "subtitle": "For prosperity, harmony, and blessings",
+      "durationMins": 120,
+      "significance": "Performed to seek Sri Satyanarayana’s blessings for wellbeing, success, and family peace.",
+      "baseFromPrice": 1499,
+      "categoryId": "home-ceremonies",
+      "languages": ["Telugu", "Tamil", "Hindi", "Kannada", "English"],
+      "packages": [
+        {
+          "id": "bronze",
+          "name": "Bronze",
+          "price": 1499,
+          "includesSamagri": false,
+          "highlights": ["Pooja only", "Mantras & Sankalpam", "Guidance for setup"]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "price": 2299,
+          "includesSamagri": true,
+          "highlights": ["Pooja + Samagri", "Flowers & basic items", "Prasadam guidance"]
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "price": 3299,
+          "includesSamagri": true,
+          "highlights": ["Grand setup", "Premium samagri", "Extra chants & arati"]
+        }
+      ]
+    },
+    {
+      "id": "griha-pravesh",
+      "title": "Griha Pravesh",
+      "subtitle": "Enter your home with auspiciousness",
+      "durationMins": 180,
+      "significance": "A sacred house-warming ritual to purify the space and invite positive energy.",
+      "baseFromPrice": 2999,
+      "categoryId": "home-ceremonies",
+      "languages": ["Telugu", "Hindi", "Sanskrit", "English"],
+      "packages": [
+        {
+          "id": "bronze",
+          "name": "Bronze",
+          "price": 2999,
+          "includesSamagri": false,
+          "highlights": ["Pooja only", "Vastu shanti basics", "Navagraha blessings"]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "price": 4299,
+          "includesSamagri": true,
+          "highlights": ["Pooja + Samagri", "Kalash & havan items", "Mango leaves & coconuts"]
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "price": 5999,
+          "includesSamagri": true,
+          "highlights": ["Grand havan", "Premium samagri", "Temple-style decor"]
+        }
+      ]
+    },
+    {
+      "id": "vehicle-pooja",
+      "title": "Car / Bike Pooja",
+      "subtitle": "For safe travels and protection",
+      "durationMins": 45,
+      "significance": "Performed before a new vehicle’s first use to seek divine protection and safety.",
+      "baseFromPrice": 799,
+      "categoryId": "car-bike",
+      "languages": ["Telugu", "Tamil", "Hindi", "English"],
+      "packages": [
+        {
+          "id": "bronze",
+          "name": "Bronze",
+          "price": 799,
+          "includesSamagri": false,
+          "highlights": ["Pooja only", "Basic chanting", "Safety blessings"]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "price": 1199,
+          "includesSamagri": true,
+          "highlights": ["Pooja + Samagri", "Flowers, kumkum", "Lemon & coconut"]
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "price": 1699,
+          "includesSamagri": true,
+          "highlights": ["Premium items", "Extra arati", "Protective talisman"]
+        }
+      ]
+    }
+  ],
+  "poojaris": [
+    {
+      "id": "sharma",
+      "name": "Sri Sharma Ji",
+      "languages": ["Hindi", "Sanskrit", "English"],
+      "experienceYears": 12,
+      "templeAffiliation": "Sri Venkateswara Temple",
+      "rating": 4.8,
+      "reviews": 1264,
+      "verified": true,
+      "specialties": ["Satyanarayana Vratam", "Griha Pravesh", "Navagraha"]
+    },
+    {
+      "id": "iyer",
+      "name": "Sri Iyer",
+      "languages": ["Tamil", "Sanskrit", "English"],
+      "experienceYears": 9,
+      "templeAffiliation": "Kapaleeshwarar Temple",
+      "rating": 4.7,
+      "reviews": 842,
+      "verified": true,
+      "specialties": ["Vehicle Pooja", "Ayusha Homam", "Ganapathi"]
+    },
+    {
+      "id": "rao",
+      "name": "Sri Rao Garu",
+      "languages": ["Telugu", "Sanskrit", "English"],
+      "experienceYears": 15,
+      "templeAffiliation": "Kanaka Durga Temple",
+      "rating": 4.9,
+      "reviews": 1567,
+      "verified": true,
+      "specialties": ["Griha Pravesh", "Lakshmi Pooja", "Namakaranam"]
+    }
+  ],
+  "promoBanners": [
+    {
+      "id": "ganesh",
+      "title": "Ganesh Chaturthi Specials",
+      "subtitle": "Book early & get 10% off on Samagri bundles",
+      "tag": "Seasonal"
+    },
+    {
+      "id": "navaratri",
+      "title": "Navaratri Home Poojas",
+      "subtitle": "Daily arati support + prasadam checklist",
+      "tag": "Popular"
+    }
+  ],
+  "shubhDaysISO": [
+    "2026-02-08",
+    "2026-02-10",
+    "2026-02-13",
+    "2026-02-16",
+    "2026-02-21"
+  ]
+}
