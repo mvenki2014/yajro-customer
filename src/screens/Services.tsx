@@ -2,7 +2,7 @@ import * as React from "react";
 import { MobileShell } from "@/components/layout/MobileShell";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { BottomNav } from "@/components/layout/BottomNav";
-import { allCategories, allServices } from "@/data/mock";
+import { allCategories, services } from "@/data/mock";
 
 interface ServicesProps {
   onSelectService: (serviceId: string) => void;
@@ -15,27 +15,24 @@ export function Services({ onSelectService, onNavigate, initialCategory }: Servi
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const filteredServices = React.useMemo(() => {
-    let services = [...allServices];
+    let list = [...services];
 
     // Filter by category
     if (selectedCategory !== "all") {
-      services = services.filter((s) => s.category === selectedCategory);
+      list = list.filter((s) => s.categoryId === selectedCategory);
     }
 
     // Filter by search
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      services = services.filter(
+      list = list.filter(
         (s) =>
-          s.name.toLowerCase().includes(query) ||
-          s.description.toLowerCase().includes(query)
+          s.title.toLowerCase().includes(query) ||
+          s.subtitle.toLowerCase().includes(query)
       );
     }
 
-    // Sort by popularity (reviews)
-    services.sort((a, b) => b.reviews - a.reviews);
-
-    return services;
+    return list;
   }, [selectedCategory, searchQuery]);
 
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -135,11 +132,11 @@ export function Services({ onSelectService, onNavigate, initialCategory }: Servi
                 <ServiceCard
                   key={service.id}
                   id={service.id}
-                  name={service.name}
-                  description={service.description}
-                  price={service.price}
-                  duration={service.duration}
-                  popular={service.popular}
+                  name={service.title}
+                  description={service.subtitle}
+                  price={service.baseFromPrice}
+                  duration={`${Math.floor(service.durationMins / 60)}h ${service.durationMins % 60}m`}
+                  popular={false}
                   image="/images/service_dummy.png"
                   onSelect={onSelectService}
                 />

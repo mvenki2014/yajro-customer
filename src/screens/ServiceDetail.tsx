@@ -16,7 +16,7 @@ export function ServiceDetail({
   onContinue: (tierId: string) => void;
 }) {
   const service = services.find((s) => s.id === serviceId) ?? services[0];
-  const [tier, setTier] = React.useState<string>("silver");
+  const [tier, setTier] = React.useState<string>(service.packages[0]?.id || "silver");
   const [language, setLanguage] = React.useState(service.languages[0]);
 
   const tierObj = service.packages.find((p) => p.id === tier) ?? service.packages[0];

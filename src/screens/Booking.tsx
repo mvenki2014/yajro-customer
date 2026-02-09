@@ -1,9 +1,57 @@
 import * as React from "react";
 import { MobileShell } from "@/components/layout/MobileShell";
 import { Badge } from "@/components/ui/Badge";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { shubhDaysISO } from "@/data/mock";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import L from "leaflet";
+import { reverseGeocode } from "@/lib/location";
+
+// Fix Leaflet marker icon issue
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+const DefaultIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
+function MapUpdater({ center }: { center: [number, number] }) {
+  const map = useMapEvents({});
+  React.useEffect(() => {
+    map.setView(center);
+  }, [center, map]);
+  return null;
+}
+
+function LocationMarker({ 
+  position, 
+  setPosition,
+  onLocationChange
+}: { 
+  position: [number, number], 
+  setPosition: (pos: [number, number]) => void,
+  onLocationChange: (address: string) => void
+}) {
+  useMapEvents({
+    click(e) {
+      const newPos: [number, number] = [e.latlng.lat, e.latlng.lng];
+      setPosition(newPos);
+      reverseGeocode(newPos[0], newPos[1]).then(data => {
+        if (data) onLocationChange(data.address);
+      });
+    },
+  });
+
+  return position ? <Marker position={position} /> : null;
+}
 
 function toISO(d: Date) {
   const yyyy = d.getFullYear();
@@ -26,12 +74,17 @@ export function Booking({
   onConfirm: () => void;
 }) {
   const today = new Date();
+  const locationData = useSelector((state: RootState) => state.location.data);
   const [selectedDate, setSelectedDate] = React.useState(toISO(today));
   const [slot, setSlot] = React.useState<string>(
     "morning"
   );
-  const [address, setAddress] = React.useState("Plot 12, Lakshmi Nagar, Hyderabad");
-  const [pinned, setPinned] = React.useState(false);
+  const [address, setAddress] = React.useState(locationData?.address || "Plot 12, Lakshmi Nagar, Hyderabad");
+  const [position, setPosition] = React.useState<[number, number]>(
+    locationData?.latitude && locationData?.longitude 
+      ? [locationData.latitude, locationData.longitude] 
+      : [17.4483, 78.3915]
+  );
 
   const next7 = Array.from({ length: 7 }).map((_, i) => {
     const d = new Date(today);
@@ -142,25 +195,30 @@ export function Booking({
                 className="mt-2 w-full rounded-xl bg-white px-3 py-2.5 text-sm ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-[#FF9933]/45"
               />
             </div>
-            <div className="h-44 bg-[linear-gradient(135deg,rgba(255,153,51,.18),rgba(251,191,36,.10),rgba(255,255,255,.6))] relative">
-              <div className="absolute inset-0 p-4">
-                <div className="flex items-start justify-between">
-                  <div className="text-xs font-semibold text-slate-700">Map preview (mock)</div>
-                  <Badge tone="neutral">Google Maps</Badge>
-                </div>
-                <div className="mt-3 grid place-items-center h-[110px]">
-                  <div className="rounded-2xl bg-white/80 ring-1 ring-slate-200 px-4 py-3 text-center">
-                    <div className="text-sm font-semibold">Drop a pin</div>
-                    <div className="text-xs text-slate-600">Simulated map interaction</div>
-                    <div className="mt-2">
-                      <Button
-                        variant={pinned ? "secondary" : "primary"}
-                        onClick={() => setPinned((v) => !v)}
-                      >
-                        {pinned ? "Pin placed" : "Place pin"}
-                      </Button>
-                    </div>
-                  </div>
+            <div className="h-64 relative">
+              <MapContainer 
+                center={position} 
+                zoom={15} 
+                style={{ height: "100%", width: "100%" }}
+                zoomControl={false}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <LocationMarker 
+                  position={position} 
+                  setPosition={setPosition}
+                  onLocationChange={setAddress}
+                />
+                <MapUpdater center={position} />
+              </MapContainer>
+              <div className="absolute top-3 right-3 z-[1000]">
+                <Badge tone="neutral">Leaflet Map</Badge>
+              </div>
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[1000] w-full px-8">
+                <div className="rounded-xl bg-white/90 backdrop-blur ring-1 ring-slate-200 px-4 py-2 text-center shadow-lg">
+                  <div className="text-[11px] font-semibold text-slate-700 leading-tight">Tap on map to pin your location</div>
                 </div>
               </div>
             </div>

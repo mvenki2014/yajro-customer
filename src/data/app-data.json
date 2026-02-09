@@ -11,7 +11,7 @@
     {
       "id": "satyanarayana-vratam",
       "title": "Satyanarayana Swamy Vratam",
-      "subtitle": "For prosperity, harmony, and blessings",
+      "subtitle": "Monthly pooja for prosperity and peace",
       "durationMins": 120,
       "significance": "Performed to seek Sri Satyanarayana’s blessings for wellbeing, success, and family peace.",
       "baseFromPrice": 1499,
@@ -44,7 +44,7 @@
     {
       "id": "griha-pravesh",
       "title": "Griha Pravesh",
-      "subtitle": "Enter your home with auspiciousness",
+      "subtitle": "Housewarming ceremony with Vastu Shanti",
       "durationMins": 180,
       "significance": "A sacred house-warming ritual to purify the space and invite positive energy.",
       "baseFromPrice": 2999,
@@ -75,9 +75,9 @@
       ]
     },
     {
-      "id": "vehicle-pooja",
-      "title": "Car / Bike Pooja",
-      "subtitle": "For safe travels and protection",
+      "id": "car-pooja",
+      "title": "New Vehicle Pooja",
+      "subtitle": "Blessings for your new vehicle",
       "durationMins": 45,
       "significance": "Performed before a new vehicle’s first use to seek divine protection and safety.",
       "baseFromPrice": 799,
@@ -105,6 +105,133 @@
           "includesSamagri": true,
           "highlights": ["Premium items", "Extra arati", "Protective talisman"]
         }
+      ]
+    },
+    {
+      "id": "bike-pooja",
+      "title": "Bike Pooja",
+      "subtitle": "Two-wheeler blessing ceremony",
+      "durationMins": 30,
+      "significance": "Seek divine protection for your two-wheeler and safe travels.",
+      "baseFromPrice": 501,
+      "categoryId": "car-bike",
+      "languages": ["Telugu", "Hindi", "Tamil"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 501, "includesSamagri": false, "highlights": ["Basic Pooja", "Sankalpam"] },
+        { "id": "silver", "name": "Silver", "price": 751, "includesSamagri": true, "highlights": ["Pooja + Samagri", "Flowers & Lemons"] }
+      ]
+    },
+    {
+      "id": "ganesh-chaturthi",
+      "title": "Ganesh Chaturthi Pooja",
+      "subtitle": "Complete Ganpati sthapana & visarjan",
+      "durationMins": 120,
+      "significance": "Celebrating the birth of Lord Ganesha, the remover of obstacles.",
+      "baseFromPrice": 2100,
+      "categoryId": "festivals",
+      "languages": ["Hindi", "Marathi", "Telugu", "English"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 2100, "includesSamagri": false, "highlights": ["Sthapana Pooja", "Aarti"] },
+        { "id": "silver", "name": "Silver", "price": 3500, "includesSamagri": true, "highlights": ["Complete Kit", "Visarjan guidance"] }
+      ]
+    },
+    {
+      "id": "diwali-lakshmi",
+      "title": "Diwali Lakshmi Pooja",
+      "subtitle": "Invoke goddess Lakshmi's blessings",
+      "durationMins": 105,
+      "significance": "Special pooja performed during Diwali for wealth, prosperity and success.",
+      "baseFromPrice": 2500,
+      "categoryId": "festivals",
+      "languages": ["Hindi", "Gujarati", "Telugu", "English"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 2500, "includesSamagri": false, "highlights": ["Lakshmi Pooja", "Kuber Pooja"] },
+        { "id": "silver", "name": "Silver", "price": 4100, "includesSamagri": true, "highlights": ["Full Samagri", "Ganesh-Lakshmi idols"] }
+      ]
+    },
+    {
+      "id": "navratri-pooja",
+      "title": "Navratri Pooja",
+      "subtitle": "Daily Durga pooja during Navratri",
+      "durationMins": 120,
+      "significance": "Nine days of worship dedicated to the nine forms of Goddess Durga.",
+      "baseFromPrice": 1800,
+      "categoryId": "festivals",
+      "languages": ["Hindi", "Sanskrit", "English"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 1800, "includesSamagri": false, "highlights": ["Daily Pooja", "Saptashati Path"] },
+        { "id": "silver", "name": "Silver", "price": 3100, "includesSamagri": true, "highlights": ["Samagri included", "Kanya Pooja guidance"] }
+      ]
+    },
+    {
+      "id": "kundali-matching",
+      "title": "Kundali Matching",
+      "subtitle": "Horoscope matching for marriage",
+      "durationMins": 60,
+      "significance": "Vedic astrology based matching of birth charts for marital compatibility.",
+      "baseFromPrice": 1100,
+      "categoryId": "astrology",
+      "languages": ["Hindi", "Telugu", "Tamil", "English"],
+      "packages": [
+        { "id": "bronze", "name": "Basic", "price": 1100, "includesSamagri": false, "highlights": ["Guna Milan", "Dosha analysis"] },
+        { "id": "silver", "name": "Detailed", "price": 2100, "includesSamagri": false, "highlights": ["Personal consultation", "Remedial advice"] }
+      ]
+    },
+    {
+      "id": "navagraha-shanti",
+      "title": "Navagraha Shanti",
+      "subtitle": "Pacify all nine planetary influences",
+      "durationMins": 150,
+      "significance": "A powerful ritual to appease the nine planets and reduce their negative effects.",
+      "baseFromPrice": 3500,
+      "categoryId": "astrology",
+      "languages": ["Sanskrit", "Hindi", "Telugu"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 3500, "includesSamagri": false, "highlights": ["Homam", "Navagraha Japa"] },
+        { "id": "silver", "name": "Silver", "price": 5500, "includesSamagri": true, "highlights": ["Full Samagri", "Daan items included"] }
+      ]
+    },
+    {
+      "id": "rudrabhishek",
+      "title": "Rudrabhishek",
+      "subtitle": "Sacred abhishekam to Lord Shiva",
+      "durationMins": 120,
+      "significance": "Ancient Vedic ritual involving the bathing of Shiva Lingam with sacred offerings.",
+      "baseFromPrice": 2100,
+      "categoryId": "temple",
+      "languages": ["Sanskrit", "Hindi", "Telugu", "Tamil"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 2100, "includesSamagri": false, "highlights": ["Pancha-amrit snanam", "Rudra path"] },
+        { "id": "silver", "name": "Silver", "price": 3500, "includesSamagri": true, "highlights": ["Full Samagri", "Bhasma & Bilva path"] }
+      ]
+    },
+    {
+      "id": "marriage-ceremony",
+      "title": "Vivah Sanskar",
+      "subtitle": "Complete Hindu wedding ceremony",
+      "durationMins": 330,
+      "significance": "The most sacred of all Hindu sanskars, uniting two souls in holy matrimony.",
+      "baseFromPrice": 15000,
+      "categoryId": "special",
+      "languages": ["Sanskrit", "Hindi", "Telugu", "Tamil", "English"],
+      "packages": [
+        { "id": "bronze", "name": "Basic", "price": 15000, "includesSamagri": false, "highlights": ["Mandap Pooja", "Saat Phere", "Kanyadaan"] },
+        { "id": "silver", "name": "Standard", "price": 25000, "includesSamagri": true, "highlights": ["Complete Samagri", "Pre-wedding rituals"] },
+        { "id": "gold", "name": "Premium", "price": 45000, "includesSamagri": true, "highlights": ["Royal Setup", "Multiple Priests", "Extended rituals"] }
+      ]
+    },
+    {
+      "id": "vastu-shanti",
+      "title": "Vastu Shanti",
+      "subtitle": "Remove vastu doshas from home",
+      "durationMins": 225,
+      "significance": "Ritual performed to eliminate architectural defects and bring balance to the home.",
+      "baseFromPrice": 4500,
+      "categoryId": "home-ceremonies",
+      "languages": ["Sanskrit", "Hindi", "Telugu"],
+      "packages": [
+        { "id": "bronze", "name": "Bronze", "price": 4500, "includesSamagri": false, "highlights": ["Vastu Homam", "Directions purification"] },
+        { "id": "silver", "name": "Silver", "price": 6500, "includesSamagri": true, "highlights": ["Full Samagri", "Energy balancing"] }
       ]
     }
   ],

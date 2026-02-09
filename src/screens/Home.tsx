@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store";
+import { fetchLocation } from "@/store/slices/locationSlice";
 import { MobileShell } from "@/components/layout/MobileShell";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -33,6 +36,24 @@ export function Home({
 }) {
   const [query, setQuery] = React.useState("");
   const [hasUnread, setHasUnread] = React.useState(true);
+  const [locationLabel] = React.useState<string | null>("Current Location");
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { data: locationData, loading: isLocating, lastUpdated } = useSelector((state: RootState) => state.location);
+
+  React.useEffect(() => {
+    // Only fetch if we don't have data or it's older than 5 minutes
+    const shouldFetch = !locationData || !lastUpdated || (Date.now() - lastUpdated > 5 * 60 * 1000);
+    if (shouldFetch) {
+      dispatch(fetchLocation());
+    }
+  }, [dispatch, locationData, lastUpdated]);
+
+  const location = locationData?.address || "Kondapur, Hyderabad";
+
+  const handleGetLocation = () => {
+    dispatch(fetchLocation());
+  };
 
   const muhurtham = {
     label: "Today’s Muhurtham",
@@ -42,7 +63,7 @@ export function Home({
 
   const filtered = services.filter((s) =>
     (s.title + " " + s.subtitle).toLowerCase().includes(query.toLowerCase())
-  );
+  ).slice(0, 4);
 
   return (
     <MobileShell
@@ -56,15 +77,15 @@ export function Home({
                   <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-bold text-slate-900">Home</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+              <div className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity" onClick={handleGetLocation}>
+                <span className="text-sm font-bold text-slate-900">{locationLabel || "Current Location"}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`text-slate-400 transition-transform ${isLocating ? 'animate-spin' : ''}`}>
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </div>
             </div>
-            <div className="mt-0.5 truncate text-[12px] font-medium text-slate-500 pl-5">
-              Kondapur, Hyderabad
+            <div className={`mt-0.5 truncate text-[11px] font-medium text-slate-500 pl-5 transition-opacity ${isLocating ? 'opacity-50' : 'opacity-100'}`}>
+              {location}
             </div>
           </div>
           <button 
