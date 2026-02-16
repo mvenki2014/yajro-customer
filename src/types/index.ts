@@ -7,7 +7,7 @@ export type Category = {
 };
 
 export type PackageTier = {
-  id: "bronze" | "silver" | "gold";
+  id: "basic" | "standard" | "premium";
   name: string;
   price: number;
   includesSamagri: boolean;
@@ -44,9 +44,13 @@ export type Route =
   | { name: "service"; serviceId: string }
   | { name: "booking"; serviceId: string; tierId: string }
   | { name: "checkout"; serviceId: string; tierId: string }
+  | { name: "payment-success"; serviceId: string; tierId: string }
+  | { name: "track"; serviceId: string; tierId: string }
   | { name: "bookings" }
+  | { name: "booking-detail"; bookingId: string }
   | { name: "tracking" }
-  | { name: "account" };
+  | { name: "account" }
+  | { name: "login" };
 
 export type ServiceCardProps = {
   id: string;

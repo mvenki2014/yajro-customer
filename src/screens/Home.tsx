@@ -136,9 +136,37 @@ export function Home({
                 <div className="text-xs font-semibold text-slate-700">{muhurtham.label}</div>
                 <div className="text-sm font-bold text-slate-900">{muhurtham.time}</div>
               </div>
-              <Badge variant="success">Shubh</Badge>
+              <div className="flex gap-2">
+                <Badge variant="success">Shubh</Badge>
+              </div>
             </div>
             <div className="mt-1 text-xs text-slate-500">{muhurtham.note}</div>
+          </div>
+        </Card>
+
+        <Card className="p-4 border-l-4 border-l-emerald-500 bg-white shadow-sm">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="h-10 w-10 rounded-xl bg-emerald-50 flex items-center justify-center text-xl shrink-0">
+                🙏
+              </div>
+              <div className="min-w-0">
+                <div className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider truncate">Active Booking</div>
+                <div className="text-sm font-bold text-slate-900 truncate">Satyanarayana Swamy Vratam</div>
+              </div>
+            </div>
+            <Button 
+              size="xs" 
+              variant="secondary" 
+              className="text-[#B35300] font-bold h-7 ring-1 ring-orange-100 shrink-0"
+              onClick={() => onNavigate?.("tracking")}
+            >
+              Track
+            </Button>
+          </div>
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-slate-500 font-medium bg-slate-50 p-2 rounded-lg">
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Poojari assigned and preparing materials</span>
           </div>
         </Card>
 
@@ -194,7 +222,7 @@ export function Home({
                 id: "offer2",
                 title: "Free Samagri Delivery",
                 code: "FREEDEL",
-                desc: "On Gold & Silver packages above ₹2000.",
+                desc: "On Premium & Standard packages above ₹2000.",
                 bg: "bg-[#FF9933]/10",
                 border: "border-[#FF9933]/20",
                 text: "text-[#B35300]",
@@ -204,7 +232,7 @@ export function Home({
                 id: "offer3",
                 title: "Festive Cashback",
                 code: "FESTIVE200",
-                desc: "Flat ₹200 cashback in your VedicSeva wallet.",
+                desc: "Flat ₹200 cashback in your Yajro wallet.",
                 bg: "bg-blue-500/10",
                 border: "border-blue-500/20",
                 text: "text-blue-700",

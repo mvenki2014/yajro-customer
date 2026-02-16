@@ -1,0 +1,88 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+interface OTPInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  length?: number;
+  className?: string;
+}
+
+export function OTPInput({
+  value,
+  onChange,
+  length = 6,
+  className,
+}: OTPInputProps) {
+  const inputRefs = React.useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const val = e.target.value;
+    if (!/^\d*$/.test(val)) return;
+
+    const newValue = value.split("");
+    // Only take the last character if the user typed something new
+    newValue[index] = val.slice(-1);
+    const updatedValue = newValue.join("");
+    onChange(updatedValue);
+
+    // Move to next box if value is entered
+    if (val && index < length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === "Backspace" && !value[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData("text").slice(0, length);
+    if (!/^\d+$/.test(pastedData)) return;
+    onChange(pastedData);
+    
+    // Focus the last filled box or the next empty box
+    const nextIndex = Math.min(pastedData.length, length - 1);
+    inputRefs.current[nextIndex]?.focus();
+  };
+
+  const renderInputs = () => {
+    const inputs = [];
+    for (let i = 0; i < length; i++) {
+      inputs.push(
+        <input
+          key={i}
+          ref={(el) => (inputRefs.current[i] = el)}
+          type="text"
+          inputMode="numeric"
+          pattern="\d*"
+          maxLength={1}
+          value={value[i] || ""}
+          onChange={(e) => handleChange(e, i)}
+          onKeyDown={(e) => handleKeyDown(e, i)}
+          onPaste={handlePaste}
+          className="w-11 h-12 text-center text-lg font-bold rounded-xl border border-slate-200 bg-slate-50 outline-none focus:ring-2 focus:ring-[#FF9933]/45 focus:border-[#FF9933]/50 focus:bg-white transition-all"
+        />
+      );
+
+      // Add a divider/gap after the 3rd box if length is 6
+      if (length === 6 && i === 2) {
+        inputs.push(
+          <div key="divider" className="flex items-center justify-center">
+            <div className="w-2 h-0.5 bg-slate-300 rounded-full" />
+          </div>
+        );
+      }
+    }
+    return inputs;
+  };
+
+  return (
+    <div className={cn("flex justify-between items-center gap-1.5", className)}>
+      {renderInputs()}
+    </div>
+  );
+}

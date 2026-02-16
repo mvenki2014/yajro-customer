@@ -30,13 +30,16 @@ export function MobileShell({
         </div>
 
         <header className="sticky top-0 z-20">
-          <div className="bg-white/70 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
-            <div className="px-4 pt-5 pb-3">
+          <div className={cn(
+            "bg-white/70 backdrop-blur-md supports-[backdrop-filter]:bg-white/60",
+            !title && "bg-transparent backdrop-blur-0"
+          )}>
+            <div className={cn("px-4 pb-3", title ? "pt-5" : "pt-0")}>
               {title ? (
                 <div className="flex items-center justify-between gap-3 relative z-10">{title}</div>
               ) : null}
             </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#FF9933]/20 to-transparent" />
+            {title && <div className="h-px bg-gradient-to-r from-transparent via-[#FF9933]/20 to-transparent" />}
           </div>
         </header>
 

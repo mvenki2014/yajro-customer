@@ -19,22 +19,22 @@
       "languages": ["Telugu", "Tamil", "Hindi", "Kannada", "English"],
       "packages": [
         {
-          "id": "bronze",
-          "name": "Bronze",
+          "id": "basic",
+          "name": "Basic",
           "price": 1499,
           "includesSamagri": false,
           "highlights": ["Pooja only", "Mantras & Sankalpam", "Guidance for setup"]
         },
         {
-          "id": "silver",
-          "name": "Silver",
+          "id": "standard",
+          "name": "Standard",
           "price": 2299,
           "includesSamagri": true,
           "highlights": ["Pooja + Samagri", "Flowers & basic items", "Prasadam guidance"]
         },
         {
-          "id": "gold",
-          "name": "Gold",
+          "id": "premium",
+          "name": "Premium",
           "price": 3299,
           "includesSamagri": true,
           "highlights": ["Grand setup", "Premium samagri", "Extra chants & arati"]
@@ -52,22 +52,22 @@
       "languages": ["Telugu", "Hindi", "Sanskrit", "English"],
       "packages": [
         {
-          "id": "bronze",
-          "name": "Bronze",
+          "id": "basic",
+          "name": "Basic",
           "price": 2999,
           "includesSamagri": false,
           "highlights": ["Pooja only", "Vastu shanti basics", "Navagraha blessings"]
         },
         {
-          "id": "silver",
-          "name": "Silver",
+          "id": "standard",
+          "name": "Standard",
           "price": 4299,
           "includesSamagri": true,
           "highlights": ["Pooja + Samagri", "Kalash & havan items", "Mango leaves & coconuts"]
         },
         {
-          "id": "gold",
-          "name": "Gold",
+          "id": "premium",
+          "name": "Premium",
           "price": 5999,
           "includesSamagri": true,
           "highlights": ["Grand havan", "Premium samagri", "Temple-style decor"]
@@ -85,22 +85,22 @@
       "languages": ["Telugu", "Tamil", "Hindi", "English"],
       "packages": [
         {
-          "id": "bronze",
-          "name": "Bronze",
+          "id": "basic",
+          "name": "Basic",
           "price": 799,
           "includesSamagri": false,
           "highlights": ["Pooja only", "Basic chanting", "Safety blessings"]
         },
         {
-          "id": "silver",
-          "name": "Silver",
+          "id": "standard",
+          "name": "Standard",
           "price": 1199,
           "includesSamagri": true,
           "highlights": ["Pooja + Samagri", "Flowers, kumkum", "Lemon & coconut"]
         },
         {
-          "id": "gold",
-          "name": "Gold",
+          "id": "premium",
+          "name": "Premium",
           "price": 1699,
           "includesSamagri": true,
           "highlights": ["Premium items", "Extra arati", "Protective talisman"]
@@ -117,8 +117,8 @@
       "categoryId": "car-bike",
       "languages": ["Telugu", "Hindi", "Tamil"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 501, "includesSamagri": false, "highlights": ["Basic Pooja", "Sankalpam"] },
-        { "id": "silver", "name": "Silver", "price": 751, "includesSamagri": true, "highlights": ["Pooja + Samagri", "Flowers & Lemons"] }
+        { "id": "basic", "name": "Basic", "price": 501, "includesSamagri": false, "highlights": ["Basic Pooja", "Sankalpam"] },
+        { "id": "standard", "name": "Standard", "price": 751, "includesSamagri": true, "highlights": ["Pooja + Samagri", "Flowers & Lemons"] }
       ]
     },
     {
@@ -131,8 +131,8 @@
       "categoryId": "festivals",
       "languages": ["Hindi", "Marathi", "Telugu", "English"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 2100, "includesSamagri": false, "highlights": ["Sthapana Pooja", "Aarti"] },
-        { "id": "silver", "name": "Silver", "price": 3500, "includesSamagri": true, "highlights": ["Complete Kit", "Visarjan guidance"] }
+        { "id": "basic", "name": "Basic", "price": 2100, "includesSamagri": false, "highlights": ["Sthapana Pooja", "Aarti"] },
+        { "id": "standard", "name": "Standard", "price": 3500, "includesSamagri": true, "highlights": ["Complete Kit", "Visarjan guidance"] }
       ]
     },
     {
@@ -145,8 +145,8 @@
       "categoryId": "festivals",
       "languages": ["Hindi", "Gujarati", "Telugu", "English"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 2500, "includesSamagri": false, "highlights": ["Lakshmi Pooja", "Kuber Pooja"] },
-        { "id": "silver", "name": "Silver", "price": 4100, "includesSamagri": true, "highlights": ["Full Samagri", "Ganesh-Lakshmi idols"] }
+        { "id": "basic", "name": "Basic", "price": 2500, "includesSamagri": false, "highlights": ["Lakshmi Pooja", "Kuber Pooja"] },
+        { "id": "standard", "name": "Standard", "price": 4100, "includesSamagri": true, "highlights": ["Full Samagri", "Ganesh-Lakshmi idols"] }
       ]
     },
     {
@@ -159,8 +159,8 @@
       "categoryId": "festivals",
       "languages": ["Hindi", "Sanskrit", "English"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 1800, "includesSamagri": false, "highlights": ["Daily Pooja", "Saptashati Path"] },
-        { "id": "silver", "name": "Silver", "price": 3100, "includesSamagri": true, "highlights": ["Samagri included", "Kanya Pooja guidance"] }
+        { "id": "basic", "name": "Basic", "price": 1800, "includesSamagri": false, "highlights": ["Daily Pooja", "Saptashati Path"] },
+        { "id": "standard", "name": "Standard", "price": 3100, "includesSamagri": true, "highlights": ["Samagri included", "Kanya Pooja guidance"] }
       ]
     },
     {
@@ -173,8 +173,8 @@
       "categoryId": "astrology",
       "languages": ["Hindi", "Telugu", "Tamil", "English"],
       "packages": [
-        { "id": "bronze", "name": "Basic", "price": 1100, "includesSamagri": false, "highlights": ["Guna Milan", "Dosha analysis"] },
-        { "id": "silver", "name": "Detailed", "price": 2100, "includesSamagri": false, "highlights": ["Personal consultation", "Remedial advice"] }
+        { "id": "basic", "name": "Basic", "price": 1100, "includesSamagri": false, "highlights": ["Guna Milan", "Dosha analysis"] },
+        { "id": "standard", "name": "Detailed", "price": 2100, "includesSamagri": false, "highlights": ["Personal consultation", "Remedial advice"] }
       ]
     },
     {
@@ -187,8 +187,8 @@
       "categoryId": "astrology",
       "languages": ["Sanskrit", "Hindi", "Telugu"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 3500, "includesSamagri": false, "highlights": ["Homam", "Navagraha Japa"] },
-        { "id": "silver", "name": "Silver", "price": 5500, "includesSamagri": true, "highlights": ["Full Samagri", "Daan items included"] }
+        { "id": "basic", "name": "Basic", "price": 3500, "includesSamagri": false, "highlights": ["Homam", "Navagraha Japa"] },
+        { "id": "standard", "name": "Standard", "price": 5500, "includesSamagri": true, "highlights": ["Full Samagri", "Daan items included"] }
       ]
     },
     {
@@ -201,8 +201,8 @@
       "categoryId": "temple",
       "languages": ["Sanskrit", "Hindi", "Telugu", "Tamil"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 2100, "includesSamagri": false, "highlights": ["Pancha-amrit snanam", "Rudra path"] },
-        { "id": "silver", "name": "Silver", "price": 3500, "includesSamagri": true, "highlights": ["Full Samagri", "Bhasma & Bilva path"] }
+        { "id": "basic", "name": "Basic", "price": 2100, "includesSamagri": false, "highlights": ["Pancha-amrit snanam", "Rudra path"] },
+        { "id": "standard", "name": "Standard", "price": 3500, "includesSamagri": true, "highlights": ["Full Samagri", "Bhasma & Bilva path"] }
       ]
     },
     {
@@ -215,9 +215,9 @@
       "categoryId": "special",
       "languages": ["Sanskrit", "Hindi", "Telugu", "Tamil", "English"],
       "packages": [
-        { "id": "bronze", "name": "Basic", "price": 15000, "includesSamagri": false, "highlights": ["Mandap Pooja", "Saat Phere", "Kanyadaan"] },
-        { "id": "silver", "name": "Standard", "price": 25000, "includesSamagri": true, "highlights": ["Complete Samagri", "Pre-wedding rituals"] },
-        { "id": "gold", "name": "Premium", "price": 45000, "includesSamagri": true, "highlights": ["Royal Setup", "Multiple Priests", "Extended rituals"] }
+        { "id": "basic", "name": "Basic", "price": 15000, "includesSamagri": false, "highlights": ["Mandap Pooja", "Saat Phere", "Kanyadaan"] },
+        { "id": "standard", "name": "Standard", "price": 25000, "includesSamagri": true, "highlights": ["Complete Samagri", "Pre-wedding rituals"] },
+        { "id": "premium", "name": "Premium", "price": 45000, "includesSamagri": true, "highlights": ["Royal Setup", "Multiple Priests", "Extended rituals"] }
       ]
     },
     {
@@ -230,8 +230,8 @@
       "categoryId": "home-ceremonies",
       "languages": ["Sanskrit", "Hindi", "Telugu"],
       "packages": [
-        { "id": "bronze", "name": "Bronze", "price": 4500, "includesSamagri": false, "highlights": ["Vastu Homam", "Directions purification"] },
-        { "id": "silver", "name": "Silver", "price": 6500, "includesSamagri": true, "highlights": ["Full Samagri", "Energy balancing"] }
+        { "id": "basic", "name": "Basic", "price": 4500, "includesSamagri": false, "highlights": ["Vastu Homam", "Directions purification"] },
+        { "id": "standard", "name": "Standard", "price": 6500, "includesSamagri": true, "highlights": ["Full Samagri", "Energy balancing"] }
       ]
     }
   ],

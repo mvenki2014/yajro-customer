@@ -25,18 +25,22 @@ const timeSlots = [
 ] as const;
 
 export function Booking({
+  serviceId,
+  tierId,
   onBack,
   onConfirm,
 }: {
+  serviceId: string;
+  tierId: string;
   onBack: () => void;
   onConfirm: () => void;
 }) {
   const today = new Date();
   const dispatch = useDispatch<AppDispatch>();
   const locationData = useSelector((state: RootState) => state.location.data);
-  const [selectedDate, setSelectedDate] = React.useState(toISO(today));
+  const [selectedDate, setSelectedDate] = React.useState(locationData?.selectedDate || toISO(today));
   const [slot, setSlot] = React.useState<string>(
-    "08-12"
+    locationData?.slot || "08-12"
   );
   const [address, setAddress] = React.useState(locationData?.address || "Plot 12, Lakshmi Nagar, Hyderabad");
   const [locationType, setLocationType] = React.useState(locationData?.locationType || "Home");
@@ -54,12 +58,14 @@ export function Booking({
         latitude: position[0],
         longitude: position[1],
         locationType,
+        selectedDate,
+        slot,
         city: locationData?.city,
         neighbourhood: locationData?.neighbourhood,
         ip: locationData?.ip,
       })
     );
-  }, [dispatch, address, position, locationType, locationData]);
+  }, [dispatch, address, position, locationType, selectedDate, slot, locationData]);
 
   const next7 = Array.from({ length: 7 }).map((_, i) => {
     const d = new Date(today);
@@ -121,7 +127,23 @@ export function Booking({
                 <button
                   key={iso}
                   type="button"
-                  onClick={() => setSelectedDate(iso)}
+                  onClick={() => {
+                    setSelectedDate(iso);
+                    // Immediately persist date change
+                    dispatch(
+                      setLocation({
+                        address,
+                        latitude: position[0],
+                        longitude: position[1],
+                        locationType,
+                        selectedDate: iso,
+                        slot,
+                        city: locationData?.city,
+                        neighbourhood: locationData?.neighbourhood,
+                        ip: locationData?.ip,
+                      })
+                    );
+                  }}
                   className={
                     "mt-1 min-w-[58px] flex flex-col items-center justify-between rounded-2xl py-2 px-1 transition " +
                     (active
@@ -161,7 +183,23 @@ export function Booking({
                 <button
                   key={t.id}
                   type="button"
-                  onClick={() => setSlot(t.id)}
+                onClick={() => {
+                  setSlot(t.id);
+                  // Immediately persist slot change
+                  dispatch(
+                    setLocation({
+                      address,
+                      latitude: position[0],
+                      longitude: position[1],
+                      locationType,
+                      selectedDate,
+                      slot: t.id,
+                      city: locationData?.city,
+                      neighbourhood: locationData?.neighbourhood,
+                      ip: locationData?.ip,
+                    })
+                  );
+                }}
                   className={
                     "rounded-2xl p-3 text-left ring-1 transition " +
                     (active
@@ -206,6 +244,8 @@ export function Booking({
                     latitude: newPos[0],
                     longitude: newPos[1],
                     locationType,
+                    selectedDate,
+                    slot,
                     city: locationData?.city,
                     neighbourhood: locationData?.neighbourhood,
                     ip: locationData?.ip,
@@ -237,6 +277,8 @@ export function Booking({
                         latitude: position[0],
                         longitude: position[1],
                         locationType: l,
+                        selectedDate,
+                        slot,
                         city: locationData?.city,
                         neighbourhood: locationData?.neighbourhood,
                         ip: locationData?.ip,
