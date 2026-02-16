@@ -50,6 +50,7 @@ export type Route =
   | { name: "booking-detail"; bookingId: string }
   | { name: "tracking" }
   | { name: "account" }
+  | { name: "edit-profile" }
   | { name: "login" };
 
 export type ServiceCardProps = {

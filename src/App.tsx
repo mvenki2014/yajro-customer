@@ -10,6 +10,7 @@ import { PaymentSuccess } from "@/screens/PaymentSuccess";
 import { Bookings } from "@/screens/Bookings";
 import { BookingDetail } from "@/screens/BookingDetail";
 import { Account } from "@/screens/Account";
+import { EditProfile } from "@/screens/EditProfile";
 import { Login } from "@/screens/Login";
 
 export function App() {
@@ -171,9 +172,27 @@ export function App() {
       <Account
         onNavigate={handleNavigation}
         user={user}
+        onEditProfile={() => setRoute({ name: "edit-profile" })}
         onLogout={() => {
           setUser(null);
           setRoute({ name: "login" });
+        }}
+      />
+    );
+  }
+
+  if (route.name === "edit-profile") {
+    return (
+      <EditProfile
+        user={user}
+        onBack={() => setRoute({ name: "account" })}
+        onSave={(updatedUser) => {
+          setUser({
+            ...user!,
+            name: updatedUser.name,
+            email: updatedUser.email,
+          });
+          setRoute({ name: "account" });
         }}
       />
     );

@@ -22,10 +22,12 @@ import {
 export function Account({
   onNavigate,
   onLogout,
+  onEditProfile,
   user: userProp,
 }: {
   onNavigate: (tab: Tab) => void;
   onLogout?: () => void;
+  onEditProfile?: () => void;
   user?: { name: string; profile: string; email: string } | null;
 }) {
   const user = {
@@ -41,7 +43,7 @@ export function Account({
     {
       title: "Profile Settings",
       items: [
-        { icon: <User className="h-5 w-5 text-blue-500" />, label: "Personal Information", extra: "Edit profile" },
+        { icon: <User className="h-5 w-5 text-blue-500" />, label: "Personal Information", extra: "Edit profile", onClick: onEditProfile },
         { icon: <MapPin className="h-5 w-5 text-red-500" />, label: "Saved Addresses", extra: "3 addresses" },
         { icon: <Bell className="h-5 w-5 text-orange-500" />, label: "Notifications", extra: "On" },
       ]
@@ -103,7 +105,10 @@ export function Account({
                 {user.name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)}
               </div>
             )}
-            <button className="absolute bottom-0 right-0 p-1.5 bg-white rounded-full shadow-md border border-slate-100">
+            <button 
+              onClick={onEditProfile}
+              className="absolute bottom-0 right-0 p-1.5 bg-white rounded-full shadow-md border border-slate-100 hover:bg-slate-50 transition-colors"
+            >
               <Settings className="h-4 w-4 text-slate-600" />
             </button>
           </div>
@@ -120,10 +125,11 @@ export function Account({
             <h3 className="px-1 text-[11px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-2">{group.title}</h3>
             <Card className="overflow-hidden border-slate-100 shadow-sm p-0">
               <div className="divide-y divide-slate-50">
-                {group.items.map((item, i) => (
+                {group.items.map((item: any, i) => (
                   <button
                     key={i}
                     className="w-full flex items-center justify-between p-4 hover:bg-slate-50 transition-colors text-left"
+                    onClick={item.onClick}
                   >
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
