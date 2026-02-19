@@ -18,11 +18,8 @@ const initialState: LocationState = {
 export const fetchLocation = createAsyncThunk(
   'location/fetchLocation',
   async (_, ) => {
-    // 1. Log IP as requested in previous requirements
+    // 1. Fetch IP location
     const ipData = await getIPLocation();
-    if (ipData?.ip) {
-      console.log("App loading with IP (RTK):", ipData.ip);
-    }
 
     try {
       // 2. Try GPS

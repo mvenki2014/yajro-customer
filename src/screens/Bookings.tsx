@@ -1,4 +1,4 @@
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -44,30 +44,31 @@ export function Bookings({
     },
   ];
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={() => onNavigate("home")}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold">My Bookings</div>
+          <div className="text-xs text-slate-500 truncate">History of your spiritual services</div>
+        </div>
+        <Badge variant="saffron">{sampleBookings.length} Bookings</Badge>
+      </>
+    ),
+    bottomNav: <BottomNav activeTab="bookings" onTabChange={onNavigate} />,
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => onNavigate("home")}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">My Bookings</div>
-            <div className="text-xs text-slate-500 truncate">History of your spiritual services</div>
-          </div>
-          <Badge variant="saffron">{sampleBookings.length} Bookings</Badge>
-        </>
-      }
-      bottomNav={<BottomNav activeTab="bookings" onTabChange={onNavigate} />}
-    >
-      <div className="space-y-3 pb-4">
+    <div className="space-y-3 pb-4">
         {sampleBookings.map((booking) => (
           <BookingCard
             key={booking.id}
@@ -88,6 +89,5 @@ export function Bookings({
           </div>
         )}
       </div>
-    </MobileShell>
   );
 }

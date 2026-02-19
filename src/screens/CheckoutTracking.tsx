@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -26,29 +26,30 @@ export function CheckoutTracking({
   };
   const total = cost.dakshina + cost.samagri + cost.convenience;
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={onBack}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold">Summary & Tracking</div>
+          <div className="text-xs text-slate-500 truncate">{service.title}</div>
+        </div>
+        <Badge variant="saffron">₹{total}</Badge>
+      </>
+    ),
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={onBack}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">Summary & Tracking</div>
-            <div className="text-xs text-slate-500 truncate">{service.title}</div>
-          </div>
-          <Badge variant="saffron">₹{total}</Badge>
-        </>
-      }
-    >
-      <div className="space-y-4">
+    <div className="space-y-4">
         <Card className="p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-bold">Plan Details</h3>
@@ -115,7 +116,6 @@ export function CheckoutTracking({
         </Card>
 
       </div>
-    </MobileShell>
   );
 }
 

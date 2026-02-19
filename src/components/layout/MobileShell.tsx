@@ -1,17 +1,23 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useShellValues } from "@/context/ShellContext";
 
 export function MobileShell({
-                              title,
+                              title: titleProp,
                               children,
-                              footer,
-                              bottomNav,
+                              footer: footerProp,
+                              bottomNav: bottomNavProp,
                             }: {
   title?: React.ReactNode;
   children: React.ReactNode;
   footer?: React.ReactNode;
   bottomNav?: React.ReactNode;
 }) {
+  const { title: contextTitle, footer: contextFooter, bottomNav: contextBottomNav } = useShellValues();
+
+  const title = titleProp !== undefined ? titleProp : contextTitle;
+  const footer = footerProp !== undefined ? footerProp : contextFooter;
+  const bottomNav = bottomNavProp !== undefined ? bottomNavProp : contextBottomNav;
   return (
     <div className="min-h-screen bg-[#FFFBF5] text-slate-900 relative">
       <div className="mx-auto w-full max-w-[420px] min-h-screen relative shadow-2xl shadow-slate-900/5 bg-white sm:border-x border-slate-200/50">
@@ -31,7 +37,7 @@ export function MobileShell({
 
         <header className="sticky top-0 z-20">
           <div className={cn(
-            "bg-white/70 backdrop-blur-md supports-[backdrop-filter]:bg-white/60",
+            "bg-white/70 backdrop-blur-md supports-backdrop-filter:bg-white/60",
             !title && "bg-transparent backdrop-blur-0"
           )}>
             <div className={cn("px-4 pb-3", title ? "pt-5" : "pt-0")}>
@@ -39,7 +45,7 @@ export function MobileShell({
                 <div className="flex items-center justify-between gap-3 relative z-10">{title}</div>
               ) : null}
             </div>
-            {title && <div className="h-px bg-gradient-to-r from-transparent via-[#FF9933]/20 to-transparent" />}
+            {title && <div className="h-px bg-linear-to-r from-transparent via-[#FF9933]/20 to-transparent" />}
           </div>
         </header>
 

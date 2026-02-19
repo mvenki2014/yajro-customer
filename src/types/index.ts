@@ -38,21 +38,6 @@ export type Poojari = {
   specialties: string[];
 };
 
-export type Route =
-  | { name: "home" }
-  | { name: "services"; categoryId?: string }
-  | { name: "service"; serviceId: string }
-  | { name: "booking"; serviceId: string; tierId: string }
-  | { name: "checkout"; serviceId: string; tierId: string }
-  | { name: "payment-success"; serviceId: string; tierId: string }
-  | { name: "track"; serviceId: string; tierId: string }
-  | { name: "bookings" }
-  | { name: "booking-detail"; bookingId: string }
-  | { name: "tracking" }
-  | { name: "account" }
-  | { name: "edit-profile" }
-  | { name: "login" };
-
 export type ServiceCardProps = {
   id: string;
   name: string;

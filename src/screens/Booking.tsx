@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
 import { Button } from "@/components/ui/Button";
@@ -28,8 +28,27 @@ export function Booking({
 }) {
   const today = new Date();
   const dispatch = useDispatch<AppDispatch>();
+
+  const next7 = React.useMemo(() => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const iso = toISO(d);
+      return {
+        iso,
+        d,
+        shubh: shubhDaysISO.includes(iso),
+      };
+    });
+  }, []);
+
   const locationData = useSelector((state: RootState) => state.location.data);
   const [timeSlots, setTimeSlots] = React.useState<Slot[]>([]);
+
+  React.useEffect(() => {
+    fetchTimeSlots().then(setTimeSlots);
+  }, []);
+
   const [selectedDate, setSelectedDate] = React.useState(locationData?.selectedDate || toISO(today));
   const [slot, setSlot] = React.useState<string>(
     locationData?.slot || "08-12"
@@ -42,14 +61,6 @@ export function Booking({
       ? [locationData.latitude, locationData.longitude]
       : [17.4483, 78.3915]
   );
-
-  React.useEffect(() => {
-    const getSlots = async () => {
-      const slots = await fetchTimeSlots();
-      setTimeSlots(slots);
-    };
-    getSlots();
-  }, []);
 
   const persistSelectedLocation = React.useCallback(() => {
     dispatch(
@@ -67,55 +78,46 @@ export function Booking({
     );
   }, [dispatch, address, position, locationType, selectedDate, slot, locationData]);
 
-  const next7 = Array.from({ length: 7 }).map((_, i) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    const iso = toISO(d);
-    const shubh = shubhDaysISO.includes(iso);
-    return { iso, d, shubh };
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={() => {
+            // Ensure the latest committed address/position are persisted before navigating back
+            persistSelectedLocation();
+            onBack();
+          }}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold">Booking & scheduling</div>
+          <div className="text-xs text-slate-500 truncate">Pick auspicious date, time & location</div>
+        </div>
+      </>
+    ),
+    footer: (
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-xs text-slate-500">Next</div>
+          <div className="text-sm font-semibold">Checkout & tracking</div>
+        </div>
+        <Button onClick={() => {
+          // Persist before moving forward
+          persistSelectedLocation();
+          onConfirm();
+        }}>Continue</Button>
+      </div>
+    ),
   });
 
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => {
-              // Ensure the latest committed address/position are persisted before navigating back
-              persistSelectedLocation();
-              onBack();
-            }}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">Booking & scheduling</div>
-            <div className="text-xs text-slate-500 truncate">Pick auspicious date, time & location</div>
-          </div>
-        </>
-      }
-      footer={
-        (
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <div className="text-xs text-slate-500">Next</div>
-              <div className="text-sm font-semibold">Checkout & tracking</div>
-            </div>
-            <Button onClick={() => {
-              // Persist before moving forward
-              persistSelectedLocation();
-              onConfirm();
-            }}>Continue</Button>
-          </div>
-        )
-      }
-    >
-      <div className="space-y-4">
+    <div className="space-y-4">
         <div>
           <h2 className="text-lg font-semibold">Choose date</h2>
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -300,6 +302,5 @@ export function Booking({
         </div>
 
       </div>
-    </MobileShell>
   );
 }

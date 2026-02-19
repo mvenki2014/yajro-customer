@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { allCategories, services } from "@/data/mock";
@@ -49,30 +49,33 @@ export function Services({ onSelectService, onNavigate, initialCategory }: Servi
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const title = React.useMemo(() => (
+    <>
+      <button
+        type="button"
+        onClick={() => onNavigate?.("home")}
+        className="rounded-xl p-2 hover:bg-slate-900/5"
+        aria-label="Back"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <div className="min-w-0 flex-1">
+        <div className="truncate font-semibold">Services</div>
+        <div className="text-xs text-slate-500 truncate">
+          {filteredServices.length} {filteredServices.length === 1 ? 'service' : 'services'} found
+        </div>
+      </div>
+    </>
+  ), [onNavigate, filteredServices.length]);
+
+  useSetShell({
+    title,
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => onNavigate?.("home")}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">Services</div>
-            <div className="text-xs text-slate-500 truncate">
-              {filteredServices.length} {filteredServices.length === 1 ? 'service' : 'services'} found
-            </div>
-          </div>
-        </>
-      }
-    >
-      <div className="flex flex-col h-[calc(100vh-140px)] -mx-4">
+    <div className="flex flex-col h-[calc(100vh-140px)] -mx-4">
         {/* Sticky Search and Categories */}
         <div className={`z-30 pb-4 transition-shadow duration-300 px-4 ${isScrolled ? 'shadow-md shadow-slate-200/50' : ''}`}>
           <div className="space-y-4">
@@ -147,6 +150,5 @@ export function Services({ onSelectService, onNavigate, initialCategory }: Servi
         {/* Bottom Navigation */}
         <BottomNav activeTab="services" onTabChange={(tab) => onNavigate(tab)} />
       </div>
-    </MobileShell>
   );
 }

@@ -1,4 +1,4 @@
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -71,32 +71,33 @@ export function BookingDetail({
     return slots[slot] || slot;
   };
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={onBack}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold text-slate-900">Booking Details</div>
+          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">{booking.id}</div>
+        </div>
+        <Badge variant={isInProgress ? "success" : "neutral"}>
+          {isInProgress && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse mr-1.5" />}
+          {booking.status}
+        </Badge>
+      </>
+    ),
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={onBack}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold text-slate-900">Booking Details</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">{booking.id}</div>
-          </div>
-          <Badge variant={isInProgress ? "success" : "neutral"}>
-            {isInProgress && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse mr-1.5" />}
-            {booking.status}
-          </Badge>
-        </>
-      }
-    >
-      <div className="space-y-4 pb-8">
+    <div className="space-y-4 pb-8">
         {/* Service Summary Card */}
         <Card className="p-4 bg-gradient-to-br from-white via-white to-orange-50/30 overflow-hidden relative">
           <div className="absolute right-0 top-0 h-16 w-16 bg-[#FF9933]/5 rounded-bl-full flex items-start justify-end p-3">
@@ -224,6 +225,5 @@ export function BookingDetail({
           </button>
         </div>
       </div>
-    </MobileShell>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
@@ -27,26 +27,27 @@ export function EditProfile({
     onSave(formData);
   };
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={onBack}
+          className="rounded-xl p-2 hover:bg-slate-900/5 transition-colors"
+          aria-label="Back"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <div className="flex-1 text-left">
+          <div className="font-bold text-base text-slate-900">Edit Profile</div>
+        </div>
+        <Badge variant="success">Secure</Badge>
+      </>
+    ),
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={onBack}
-            className="rounded-xl p-2 hover:bg-slate-900/5 transition-colors"
-            aria-label="Back"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <div className="flex-1 text-left">
-            <div className="font-bold text-base text-slate-900">Edit Profile</div>
-          </div>
-          <Badge variant="success">Secure</Badge>
-        </>
-      }
-    >
-      <div className="space-y-8 py-4">
+    <div className="space-y-8 py-4">
         {/* Profile Image Section */}
         <div className="flex flex-col items-center">
           <div className="relative">
@@ -127,6 +128,5 @@ export function EditProfile({
           Update Profile
         </Button>
       </div>
-    </MobileShell>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -20,55 +20,53 @@ export function Track({
 }: {
   serviceId: string;
   onNavigate: (tab: Tab) => void;
-  onHome: () => void;
 }) {
   const service = services.find((s) => s.id === serviceId) ?? services[0];
   const [active, setActive] = React.useState<string>("assigned");
   const activeIndex = steps.findIndex((s) => s.id === active);
 
-  const handleNextStep = () => {
-    if (activeIndex < steps.length - 1) {
-      setActive(steps[activeIndex + 1].id);
-    } else {
-      setActive(steps[0].id); // Loop back for testing
-    }
-  };
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={() => onNavigate("bookings")}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold">Live Tracking</div>
+          <div className="text-xs text-slate-500 truncate">{service.title}</div>
+        </div>
+        <Badge variant="success">On Time</Badge>
+      </>
+    ),
+    bottomNav: <BottomNav activeTab="tracking" onTabChange={onNavigate} />,
+    footer: (
+      <div className="flex flex-col gap-3 mb-14">
+        <div className="flex items-center justify-between px-1">
+          <div className="text-xs text-slate-500 font-medium">Testing tool</div>
+          <Badge variant="saffron" className="text-[10px] py-0 h-4">Dev Only</Badge>
+        </div>
+        <Button onClick={() => {
+          if (activeIndex < steps.length - 1) {
+            setActive(steps[activeIndex + 1].id);
+          } else {
+            setActive(steps[0].id); // Loop back for testing
+          }
+        }} className="w-full shadow-lg shadow-orange-200">
+          Move Progress
+        </Button>
+      </div>
+    ),
+  });
 
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => onNavigate("bookings")}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">Live Tracking</div>
-            <div className="text-xs text-slate-500 truncate">{service.title}</div>
-          </div>
-          <Badge variant="success">On Time</Badge>
-        </>
-      }
-      bottomNav={<BottomNav activeTab="tracking" onTabChange={onNavigate} />}
-      footer={
-        <div className="flex flex-col gap-3 mb-14">
-          <div className="flex items-center justify-between px-1">
-            <div className="text-xs text-slate-500 font-medium">Testing tool</div>
-            <Badge variant="saffron" className="text-[10px] py-0 h-4">Dev Only</Badge>
-          </div>
-          <Button onClick={handleNextStep} className="w-full shadow-lg shadow-orange-200">
-            Move Progress
-          </Button>
-        </div>
-      }
-    >
-      <div className="space-y-4">
+    <div className="space-y-4">
         <Card className="overflow-hidden">
           <div className="p-4">
             <div className="flex items-center justify-between">
@@ -195,7 +193,6 @@ export function Track({
           </div>
         </Card>
       </div>
-    </MobileShell>
   );
 }
 

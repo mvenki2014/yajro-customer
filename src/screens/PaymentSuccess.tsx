@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -47,30 +47,31 @@ export function PaymentSuccess({
     return slots[slot] || slot;
   };
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={() => onNavigate("bookings")}
+          className="rounded-xl p-2 hover:bg-slate-900/5"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-semibold">Payment Status</div>
+          <div className="text-xs text-slate-500 truncate">{service.title}</div>
+        </div>
+        <Badge variant="success">Success</Badge>
+      </>
+    ),
+    bottomNav: <BottomNav activeTab="bookings" onTabChange={onNavigate} />,
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => onNavigate("bookings")}
-            className="rounded-xl p-2 hover:bg-slate-900/5"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="min-w-0 flex-1">
-            <div className="truncate font-semibold">Payment Status</div>
-            <div className="text-xs text-slate-500 truncate">{service.title}</div>
-          </div>
-          <Badge variant="success">Success</Badge>
-        </>
-      }
-      bottomNav={<BottomNav activeTab="bookings" onTabChange={onNavigate} />}
-    >
-      <div className="flex flex-col h-[calc(100vh-160px)] overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-160px)] overflow-hidden">
         <div className="flex flex-col items-center justify-center pt-4 pb-4 shrink-0">
           <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mb-3 relative">
               <div className="absolute inset-0 rounded-full ring-4 ring-emerald-500/20 animate-pulse" />
@@ -151,6 +152,5 @@ export function PaymentSuccess({
           </Card>
         </div>
       </div>
-    </MobileShell>
   );
 }

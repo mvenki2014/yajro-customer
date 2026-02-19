@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Mail, ArrowRight, ChevronLeft } from "lucide-react";
@@ -51,10 +51,15 @@ export function Login({
     }, 1500);
   };
 
+  useSetShell({
+    title: null,
+    footer: null,
+    bottomNav: null,
+  });
+
   if (isOtpSent) {
     return (
-      <MobileShell>
-          <div className="flex flex-col min-h-[80vh] px-2 py-4">
+      <div className="flex flex-col min-h-[80vh] px-2 py-4">
           <div className="mb-6">
             <button
               onClick={() => setIsOtpSent(false)}
@@ -108,13 +113,11 @@ export function Login({
             </div>
           </div>
         </div>
-      </MobileShell>
     );
   }
 
   return (
-    <MobileShell>
-      <div className="flex flex-col min-h-[80vh] px-2 py-4">
+    <div className="flex flex-col min-h-[80vh] px-2 py-4">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-[#FF9933] to-amber-500 shadow-xl shadow-orange-200 mb-4 rotate-3">
             <span className="text-white text-3xl font-black">Y</span>
@@ -204,6 +207,5 @@ export function Login({
           <a href="#" className="text-[#B35300] underline underline-offset-2">Privacy Policy</a>
         </p>
       </div>
-    </MobileShell>
   );
 }

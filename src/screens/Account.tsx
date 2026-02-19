@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileShell } from "@/components/layout/MobileShell";
+import { useSetShell } from "@/context/ShellContext";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -81,31 +81,33 @@ export function Account({
     }
   ];
 
+  useSetShell({
+    title: (
+      <>
+        <button
+          type="button"
+          onClick={() => onNavigate("home")}
+          className="rounded-xl p-2 hover:bg-slate-900/5 transition-colors"
+          aria-label="Back"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="flex-1 text-left">
+          <div className="truncate font-bold text-base text-slate-900">My Account</div>
+        </div>
+        <Badge variant={user.subscription === "Premium" ? "gold" : "saffron"} className="px-2 py-0.5 uppercase tracking-wider text-[9px] font-bold">
+          {user.subscription === "Premium" && <Crown className="h-2.5 w-2.5 mr-1 inline-block" />}
+          {user.subscription}
+        </Badge>
+      </>
+    ),
+    bottomNav: <BottomNav activeTab="account" onTabChange={onNavigate} />,
+  });
+
   return (
-    <MobileShell
-      title={
-        <>
-          <button
-            type="button"
-            onClick={() => onNavigate("home")}
-            className="rounded-xl p-2 hover:bg-slate-900/5 transition-colors"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <div className="flex-1 text-left">
-            <div className="truncate font-bold text-base text-slate-900">My Account</div>
-          </div>
-          <Badge variant={user.subscription === "Premium" ? "gold" : "saffron"} className="px-2 py-0.5 uppercase tracking-wider text-[9px] font-bold">
-            {user.subscription === "Premium" && <Crown className="h-2.5 w-2.5 mr-1 inline-block" />}
-            {user.subscription}
-          </Badge>
-        </>
-      }
-      bottomNav={<BottomNav activeTab="account" onTabChange={onNavigate} />}
-    >
+    <>
       <div className="space-y-6 pb-6">
         {/* Profile Header */}
         <div className="flex flex-col items-center py-4">
@@ -186,6 +188,6 @@ export function Account({
         settings={notificationSettings}
         onSettingsChange={setNotificationSettings}
       />
-    </MobileShell>
+    </>
   );
 }
