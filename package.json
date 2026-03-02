@@ -1,14 +1,25 @@
 {
   "name": "react-vite-tailwind",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cap:sync": "npm run build && npx cap sync",
+    "cap:androido": "npx cap add android && npm run build && npx capacitor-assets generate --android && npx cap sync android && npx cap open android",
+    "cap:android": "npm install && npm run build && (npx cap add android || echo 'Android Exists') && npx cap sync android && npx cap open android",
+    "cap:ios": "npm run build && npx cap sync ios && npx cap open ios"
   },
   "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/app": "^8.0.1",
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/geolocation": "^8.1.0",
+    "@capacitor/ios": "^8.1.0",
+    "@capacitor/status-bar": "^8.0.1",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-scroll-area": "^1.2.10",
@@ -31,6 +42,7 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@tailwindcss/vite": "4.1.17",
     "@types/node": "^22.0.0",
     "@types/react": "19.2.7",
